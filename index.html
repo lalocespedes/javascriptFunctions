@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="lalocespedes">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bower_components/bootswatch-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">API Tests</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="superheroes">Supers</a></li>
+                <li><a ui-sref="people">People</a></li>
+                <li><a ui-sref="taxes">Taxes</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div ui-view></div>
+</body>
+
+</html>

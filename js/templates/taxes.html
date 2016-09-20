@@ -1,0 +1,27 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-6">
+            Taxes All
+            <hr>
+            <p>selected item is : {{vm.selectedTax.tax_name}}</p>
+            <p>selected item is : {{vm.selectedTax.tax_rate_percent}}</p>
+            <select class="form-control"
+            id="selectTax" 
+            ng-model="vm.selectedTax" 
+            ng-options="tax.tax_name for tax in vm.taxes" 
+            ng-click="vm.addselect()"></select>
+            <hr>
+            <p ng-repeat="tax in vm.taxes">
+                {{tax.tax_name}} {{tax.tax_rate_percent}}
+            </p>
+        </div>
+        <div class="col-sm-6">
+            Taxes Selected:
+            <p ng-repeat="tax in vm.post.taxes">
+                {{tax.tax_name}} - {{tax.tax_rate_percent}}
+            </p>
+        </div>
+    </div>
+
+</div>
