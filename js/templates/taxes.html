@@ -10,7 +10,9 @@
             id="selectTax" 
             ng-model="vm.selectedTax" 
             ng-options="tax.tax_name for tax in vm.taxes" 
-            ng-click="vm.addselect()"></select>
+            ng-change="vm.addselect()">
+            <option value="">Selecciona impuesto</value>
+            </select>
             <hr>
             <p ng-repeat="tax in vm.taxes">
                 {{tax.tax_name}} {{tax.tax_rate_percent}}
@@ -18,9 +20,7 @@
         </div>
         <div class="col-sm-6">
             Taxes Selected:
-            <p ng-repeat="tax in vm.post.taxes">
-                {{tax.tax_name}} - {{tax.tax_rate_percent}}
-            </p>
+            <h3 ng-repeat="tax in vm.post.taxes"><span class="label label-primary">{{tax.tax_name}} - {{tax.tax_rate_percent}} <a href ng-click="vm.removeselect(tax)"><i class="fa fa-times"></i></a> </span></h3>
         </div>
     </div>
 

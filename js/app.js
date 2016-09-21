@@ -232,30 +232,17 @@
 
                 vm.taxes = response;
 
-                console.log(JSON.stringify(vm.taxes));
-                console.log(JSON.stringify(vm.post.taxes));
+                _(vm.taxes).each(function (taxes, keyt) {
 
-                // _(vm.taxes).each(function (taxes, keyt) {
+                    _(vm.post.taxes).each(function (post, keyp) {
 
-                //     _(vm.post.taxes).each(function (post, keyp) {
-
-                //         if (JSON.stringify(vm.taxes[keyt]) == JSON.stringify(vm.post.taxes[keyp])) {
-                //             vm.taxes.splice(keyt, 1);
-                //         }
-
-                //     });
-
-                // });
-
-                for (var i = 0; i < vm.taxes.length; i++) {
-                    for (var j = 0; j < vm.post.taxes.length; j++) {
-                        //if (JSON.stringify(vm.taxes[i]) == JSON.stringify(vm.post.taxes[j])) {
-                        if (angular.toJson(vm.taxes[i]) == angular.toJson(vm.post.taxes[j])) {
-                            console.log('borrar');
-                            vm.taxes.splice(i, 1);
+                        if (angular.toJson(vm.taxes[keyt]) == angular.toJson(vm.post.taxes[keyp])) {
+                            vm.taxes.splice(keyt, 1);
                         }
-                    }
-                }
+
+                    });
+
+                });
 
                 // vm.taxes = vm.taxes.filter(function (all, item, index) {
 
@@ -269,7 +256,7 @@
 
                 // });
 
-                vm.selectedTax = _.first(vm.taxes);
+                // vm.selectedTax = _.first(vm.taxes);
 
             });
 
@@ -279,7 +266,7 @@
 
                 vm.taxes.splice(vm.taxes.indexOf(vm.selectedTax), 1);
 
-                vm.selectedTax = _.first(vm.taxes);
+                // vm.selectedTax = _.first(vm.taxes);
                 vm.post.taxes = _.compact(vm.post.taxes);
 
                 if (!vm.taxes.length) {
@@ -288,6 +275,16 @@
                     return false;
 
                 }
+
+            };
+
+            vm.removeselect = function(value) {
+
+                vm.taxes.push(value);
+
+                vm.post.taxes.splice(value, 1);
+
+                console.log(value);
 
             };
         }
