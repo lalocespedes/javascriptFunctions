@@ -249,7 +249,8 @@
 
                 for (var i = 0; i < vm.taxes.length; i++) {
                     for (var j = 0; j < vm.post.taxes.length; j++) {
-                        if (JSON.stringify(vm.taxes[i]) == JSON.stringify(vm.post.taxes[j])) {
+                        //if (JSON.stringify(vm.taxes[i]) == JSON.stringify(vm.post.taxes[j])) {
+                        if (angular.toJson(vm.taxes[i]) == angular.toJson(vm.post.taxes[j])) {
                             console.log('borrar');
                             vm.taxes.splice(i, 1);
                         }
