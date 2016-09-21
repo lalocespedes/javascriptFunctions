@@ -196,7 +196,6 @@
         var vm = this;
 
         vm.post = {};
-        vm.post.taxes = [];
 
         vm.post.taxes = [
             {
@@ -205,20 +204,6 @@
                 "tax_rate_percent": '16.00',
                 "tax_type": "T",
                 "tax_name": "IVA"
-            },
-            {
-                "tax_rate_id": 5,
-                "tax_rate_name": 'ISR',
-                "tax_rate_percent": '-10.00',
-                "tax_type": "R",
-                "tax_name": "RETENCION ISR"
-            },
-            {
-                "tax_rate_id": 6,
-                "tax_rate_name": 'ISH',
-                "tax_rate_percent": '3.00',
-                "tax_type": "TL",
-                "tax_name": "ISH"
             }
         ];
 
@@ -262,12 +247,54 @@
 
             vm.addselect = function (value) {
 
-                vm.post.taxes.push(vm.selectedTax);
+                if(!vm.amount) {
 
-                vm.taxes.splice(vm.taxes.indexOf(vm.selectedTax), 1);
+                    if(!window.Notification) {
+                        console.log('no allow');
+                    } else {
 
-                // vm.selectedTax = _.first(vm.taxes);
+                        Notification.requestPermission(function(p) {
+
+                            var notify = new Notification('Falta el monto', {
+                                body: 'Checalo por favor'
+                            });
+
+                            notify.onclick = function() {
+
+                                console.log('click');
+
+                                notify.close();
+
+                            };
+
+                        });
+
+                    }
+
+                    console.log('captura un monto');
+                    return false;
+
+                }
+
+                var del = parseInt(vm.taxes.indexOf(vm.selectedTax));
+
+                var nuevo = vm.taxes.map(function(item) {
+
+                    return item;
+
+                });
+
+                nuevo.splice(del, 1);
+
+                vm.taxes = nuevo;
+
+                vm.selectedTax.amount = vm.amount;
+
+                vm.post.taxes.push(angular.fromJson(vm.selectedTax));
+
                 vm.post.taxes = _.compact(vm.post.taxes);
+
+                vm.amount = "";
 
                 if (!vm.taxes.length) {
 
@@ -280,11 +307,15 @@
 
             vm.removeselect = function(value) {
 
-                vm.taxes.push(value);
+                if (!vm.taxes.length) {
 
-                vm.post.taxes.splice(value, 1);
+                    angular.element('#selectTax').attr('disabled', false);
 
-                console.log(value);
+                }
+
+                vm.taxes.push(angular.fromJson(value));
+
+                vm.post.taxes.splice(vm.post.taxes.indexOf(value), 1);
 
             };
         }

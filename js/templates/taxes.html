@@ -1,16 +1,17 @@
 <div class="container-fluid">
-
     <div class="row">
         <div class="col-sm-6">
             Taxes All
             <hr>
-            <p>selected item is : {{vm.selectedTax.tax_name}}</p>
-            <p>selected item is : {{vm.selectedTax.tax_rate_percent}}</p>
+            <div class="form-group">
+                <label for="amount">Importe</label>
+                <input type="text" class="form-control" id="amount" ng-model="vm.amount" placeholder="0.00">
+            </div>
             <select class="form-control"
             id="selectTax" 
             ng-model="vm.selectedTax" 
-            ng-options="tax.tax_name for tax in vm.taxes" 
-            ng-change="vm.addselect()">
+            ng-options="tax.tax_name for tax in vm.taxes | orderBy:'tax_rate_id'"" 
+            ng-click="vm.addselect()">
             <option value="">Selecciona impuesto</value>
             </select>
             <hr>
@@ -20,8 +21,7 @@
         </div>
         <div class="col-sm-6">
             Taxes Selected:
-            <h3 ng-repeat="tax in vm.post.taxes"><span class="label label-primary">{{tax.tax_name}} - {{tax.tax_rate_percent}} <a href ng-click="vm.removeselect(tax)"><i class="fa fa-times"></i></a> </span></h3>
+            <h3 ng-repeat="tax in vm.post.taxes"><span class="label label-primary">{{tax.tax_name}} <small>{{tax.tax_rate_percent}} %</small> {{tax.amount | currency}} <a href ng-click="vm.removeselect(tax)"><i class="fa fa-times"></i></a> </span></h3>
         </div>
     </div>
-
 </div>
