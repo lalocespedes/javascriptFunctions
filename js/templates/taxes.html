@@ -10,7 +10,7 @@
             <select class="form-control"
             id="selectTax" 
             ng-model="vm.selectedTax" 
-            ng-options="tax.tax_name for tax in vm.taxes | orderBy:'tax_rate_id'"" 
+            ng-options="tax.tax_name for tax in vm.taxes | orderBy:'tax_rate_id'" 
             ng-click="vm.addselect()">
             <option value="">Selecciona impuesto</value>
             </select>
